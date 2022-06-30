@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Table } from 'reactstrap';
 import { StyleListCar } from './../css/StyleListCar.css';
+import AddCar from './AddCar';
 
 
 // const axios = require('axios');
@@ -41,7 +42,7 @@ useEffect(() =>{
                             <h2>Admin <b>ListCar</b></h2>
                         </div>
                         <div class="col-xs-7">
-                            <a href="" class="btn btn-primary"><i
+                            <a href="{<AddCar>}" class="btn btn-primary"><i
                                 class="material-icons">&#xE147;</i><span>Add New User</span></a>
                         </div>
                     </div>

@@ -22,8 +22,8 @@ function App() {
     //   </header>
     // </div>
     <>
-    {/* <CarList></CarList> */}
-    <AddCar></AddCar>
+    <CarList></CarList>
+    {/* <AddCar></AddCar> */}
     </>
   );
 }

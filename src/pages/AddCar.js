@@ -33,34 +33,36 @@ const AddCar = (props) =>{
 return (
     <>
     <div class="container">
-   
+        <center>   <h3>FORM THÊM MỚI XE</h3></center>
+ 
             <form action="" id="form">
+       
                 <div class="column one">
-                <h3>FORM THÊM MỚI XE</h3>
+               
                     <div class="field username">
-                        <label for="Username_">Username</label>
-                        <input type="text" name="Username" id="Username_" placeholder="type your name in english only" required/>
+                        <label for="Username_">Hinh anh</label>
+                        <input type="file" name="image"  id="Username_" placeholder="hinh anh" required/>
                     </div>
                     <div class="field password">
-                        <label for="Password_">password</label>
-                        <input type="password" name="password" id="Password_" placeholder="type a complex password" required/>
+                        <label for="Password_">hang xe</label>
+                        <input type="text"name="hãng" id="Password_" placeholder="type a complex password" required/>
                     </div>
                     <div class="field email">
-                        <label for="Email_">email</label>
-                        <input type="email" name="email" id="Email_"  placeholder="type a valid email" required/>
+                        <label for="Email_">mau xe</label>
+                        <input type="text" name="màu" id="Email_"  placeholder="type a valid email" required/>
                     </div>
                 </div>
                 <div class="column two">
                     <div class="field phone">
-                        <label for="Phone_">phone</label>
+                        <label for="Phone_">nha sx</label>
                         <input type="tel" name="phone" id="Phone_"/>
                     </div>
                     <div class="field Brief">
-                        <label for="Brief_">brief</label>
-                        <textarea></textarea>
+                        <label for="Brief_">ngay sx</label>
+                        <input  type="date"></input>
                     </div>
                 </div>
-                <input type="submit" value="register" class="register"/>
+                <input type="submit" value="Submit" class="register"/>
             </form>
         </div>
     </>
