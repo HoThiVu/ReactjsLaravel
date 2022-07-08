@@ -1,71 +1,130 @@
 import { tab } from '@testing-library/user-event/dist/tab';
-import { createRef } from 'react';
-// import React, { useEffect } from 'react';
-import {FormCssListCar} from './../css/FormCssListCar.css';
-// import { StyleListCar } from './../css/StyleListCar.css';
-import { Table } from 'reactstrap';
+import { createRef, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Table } from 'reactstrap';
 import React, { Component } from 'react';
+import axios from axios;
+import { Modal, ModalBody, ModalHeader, Button, FormGroup, Input, Label, ModalFooter } from 'reactstrap';
+const AddCar = (props) => {
+    const [modal, setModal] = useState(false);
+    const [car, setCar] = useState({});
+    const toogle = () => {
+        setModal(!modal);
+    }
 
 
 
-const AddCar = (props) =>{
-//     const [cars, setCars] = useState([]);
-//     const getCars = () => {
-//         // Make a request for a user with a given ID
-//         axios.get('http://localhost:8000/api/cars')
-//             .then(function (response) {                
-//                 // handle success
-//                 console.log(response);
-//                 setCars(response.data.data)
-//             })
-//             .catch(function (error) {
-//                 // handle error
-//                 console.log(error);
-//             })
-//             .then(function () {
-//                 // always executed
-//             });
-//     }
+    const handlerInput = (e) => {
+        const { name, value } = e.target;
+        console.log(car);
+        setCar({
+            ...car,
+            file: e.target.files && e.target.files.length ? URL.createObjectURL(e.target.files[0]) : car.file,
+            image: e.target.files && e.target.files.length ? e.target.files[0].name : car.image,
+            [name]: value,
+        })
+    }
 
-// useEffect(() =>{
-//     getCars()
-// },[])
-return (
-    <>
-    <div class="container">
-        <center>   <h3>FORM THÊM MỚI XE</h3></center>
- 
-            <form action="" id="form">
-       
-                <div class="column one">
-               
-                    <div class="field username">
-                        <label for="Username_">Hinh anh</label>
-                        <input type="file" name="image"  id="Username_" placeholder="hinh anh" required/>
-                    </div>
-                    <div class="field password">
-                        <label for="Password_">hang xe</label>
-                        <input type="text"name="hãng" id="Password_" placeholder="type a complex password" required/>
-                    </div>
-                    <div class="field email">
-                        <label for="Email_">mau xe</label>
-                        <input type="text" name="màu" id="Email_"  placeholder="type a valid email" required/>
-                    </div>
-                </div>
-                <div class="column two">
-                    <div class="field phone">
-                        <label for="Phone_">nha sx</label>
-                        <input type="tel" name="phone" id="Phone_"/>
-                    </div>
-                    <div class="field Brief">
-                        <label for="Brief_">ngay sx</label>
-                        <input  type="date"></input>
-                    </div>
-                </div>
-                <input type="submit" value="Submit" class="register"/>
-            </form>
+    const handleSubmitForm = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:8000/api/cars', {
+            firstName: 'Fred',
+            lastName: 'Flintstone'
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+    return (
+        <div>
+            <Button
+                color="danger"
+                onClick={toogle}
+            >
+                ADD A NEW CAR
+            </Button>
+            <Modal isOpen={modal} toggle={toogle}
+
+            >
+                <ModalHeader toggle={toogle}>
+                    Modal title
+                </ModalHeader>
+                <ModalBody>
+                    {/* <Form onSubmit={onSubmit}> */}
+                    <FormGroup>
+                        <Label for="exampleEmail">
+                            màu
+                        </Label>
+                        <Input
+                            id="exampleEmail"
+                            name="màu"
+                            value={car.màu}
+                            onChange={handlerInput}
+                            placeholder="with a placeholder"
+                            type="text"
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="exampleEmail">
+                            hãng
+                        </Label>
+                        <Input
+                            id="exampleEmail"
+                            name="hãng"
+                            value={car.hãng}
+                            onChange={handlerInput}
+                            placeholder="with a placeholder"
+                            type="text"
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="exampleEmail">
+                            image
+                        </Label>
+                        <Input
+                            id="exampleEmail"
+                            name="image"
+                            value={car.image}
+                            onChange={handlerInput}
+                            placeholder="with a placeholder"
+                            type="file"
+                        />
+                        <img alt='ts' src={car.file}></img>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="exampleEmail">
+                            produced_on
+                        </Label>
+                        <Input
+                            id="exampleEmail"
+                            name="produced_on"
+                            value={car.produced_on}
+                            onChange={handlerInput}
+                            placeholder="with a placeholder"
+                            type="date"
+                        />
+                    </FormGroup>
+                    {/* </Form> */}
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        color="primary"
+                        onClick={handleSubmitForm}
+                    >
+                        Save
+                    </Button>
+
+                    <Button onClick={toogle} >
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
         </div>
-    </>
-);
+    );
 }
+
 export default AddCar;

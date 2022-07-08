@@ -1,13 +1,10 @@
-import { tab } from '@testing-library/user-event/dist/tab';
-// import React, { useEffect } from 'react';
+
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Table } from 'reactstrap';
 import { StyleListCar } from './../css/StyleListCar.css';
 import AddCar from './AddCar';
 
-
-// const axios = require('axios');
 
 
 
@@ -40,11 +37,9 @@ useEffect(() =>{
                     <div class="row">
                         <div class="col-xs-5">
                             <h2>Admin <b>ListCar</b></h2>
+                            <AddCar></AddCar>
                         </div>
-                        <div class="col-xs-7">
-                            <a href="{<AddCar>}" class="btn btn-primary"><i
-                                class="material-icons">&#xE147;</i><span>Add New User</span></a>
-                        </div>
+                       
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
@@ -71,7 +66,6 @@ useEffect(() =>{
                             <td><a href="#">
                                 <img  width="100px"
                                 height="100px" class="avatar" src={`http://localhost:8000/img/${car.image}`} alt="Avatar" /></a></td>
- {/* console.log(1111);  */}
                             <td>{car.hãng}</td>
                             <td>{car.màu}</td>
                             <td>{car.produced_on}</td>
