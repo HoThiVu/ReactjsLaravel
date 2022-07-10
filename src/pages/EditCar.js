@@ -19,7 +19,7 @@ const EditCar=({getCars, toggleEditModal,editCarData,editmodal,setEditCarData})=
     // },[]);
     const onChangeModel=(event)=>{
         setEditCarData(previousState=>{
-            return {...previousState,model: event.target.value};
+            return {...previousState,hãng: event.target.value};
         });
         console.log(editCarData);
     };
@@ -27,7 +27,7 @@ const EditCar=({getCars, toggleEditModal,editCarData,editmodal,setEditCarData})=
 
     const onChangeDesc=(event)=>{
         setEditCarData(previousState=>{
-            return {...previousState,description: event.target.value};
+            return {...previousState,màu: event.target.value};
         });
         console.log(editCarData);
         
@@ -41,21 +41,22 @@ const EditCar=({getCars, toggleEditModal,editCarData,editmodal,setEditCarData})=
     };
 
     const onChangeImage=(event)=>{
+        console.log("tét");
         const preImg=document.getElementById('preview-img');
         const file=event.target.files[0];
-        if(file){
-            var reader = new FileReader();
-            reader.onload = (e)=> {
-                const obj_url=URL.createObjectURL(file);
-                preImg.setAttribute('src', obj_url);
-                URL.revokeObjectURL(obj_url);
-            };
+        // if(file){
+        //     var reader = new FileReader();
+        //     reader.onload = (e)=> {
+        //         const obj_url=URL.createObjectURL(file);
+        //         preImg.setAttribute('src', obj_url);
+        //         URL.revokeObjectURL(obj_url);
+        //     };
             
-            // 
-        }
-        console.log(preImg.src);
+        //     // 
+        // }
+        // console.log(preImg.src);
         setEditCarData(previousState=>{
-            return {...previousState,image:event.target.files[0].name};
+            return {...previousState,image:event.target.files[0].name,file:URL.createObjectURL(file)};
         });
         
         console.log(editCarData);
@@ -104,12 +105,12 @@ const EditCar=({getCars, toggleEditModal,editCarData,editmodal,setEditCarData})=
              <ModalHeader toggle={toggleEditModal}>Edit a car</ModalHeader>
              <ModalBody>
                 <FormGroup>
-                  <Label for="model">Model</Label>
-                  <Input id="model" name="model" onChange={onChangeModel} value={editCarData.hãng?editCarData.hãng:''}/>
+                  <Label for="model">Hãng</Label>
+                  <Input id="model" name="hãng" onChange={onChangeModel} value={editCarData.hãng?editCarData.hãng:''}/>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="description">Description</Label>
-                  <Input id="description" name="description" onChange={onChangeDesc} value={editCarData.màu?editCarData.màu:''}/>
+                  <Label for="description">Màu</Label>
+                  <Input id="description" name="màu" onChange={onChangeDesc} value={editCarData.màu?editCarData.màu:''}/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="produced_on">Produced_on</Label>
@@ -118,7 +119,7 @@ const EditCar=({getCars, toggleEditModal,editCarData,editmodal,setEditCarData})=
                  <FormGroup>
                   <Label for="image">Image</Label>
                   <Input id="fileupload" type="file" name="image" onChange={onChangeImage}/>
-                    <img id="preview-img" className="img-thumbnail img-fluid" src={editCarData.image?"http://localhost:8000/car/"+editCarData.image:'#'}/>                   
+                    <img id="preview-img" className="img-thumbnail img-fluid" src={editCarData.file?editCarData.file:"http://localhost:8000/img/"+editCarData.image}/>                   
                 </FormGroup>
               </ModalBody>
               <ModalFooter>

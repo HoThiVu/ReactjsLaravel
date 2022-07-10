@@ -147,6 +147,8 @@ const AddCar = ({onAdded}) => {
                             <Button
                                 color="primary"
                                 type='submit'
+                                // onClick ={handleSubmitForm} 
+
                             >
                                 Save
                             </Button>
