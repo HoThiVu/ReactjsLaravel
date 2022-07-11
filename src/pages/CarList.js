@@ -30,7 +30,7 @@ const CarList = (props) => {
 
     //bắt đầu làm cho EditCar.js
     const [editmodal, setEditModal] = useState(false);
-
+    const [search,setSearch] = useState();
     const [editCarData, setEditCarData] = useState({
         id: "",
         hãng: "",
@@ -60,8 +60,14 @@ const CarList = (props) => {
     useEffect(() => {
         if (!isLoaded) getCars();
     }, [isLoaded])
-    // search-----------
-   
+
+    const handleSearch = async (e,search) => {
+        const res = await axios.get(`http://127.0.0.1:8000/api/show?search=${search}`);
+        // const carList = await res.data;
+     
+        setCars(res.data.data);
+
+    }
     // import axios from "axios";
     // import AddCar from './AddCar';
     // import EditCar from './EditCar';
@@ -139,20 +145,8 @@ const CarList = (props) => {
 
     return (
         <div className="table-responsive">
-            <input
-                size="lg"
-                placeholder="Search by title, e.g. Bird"
-                mb="1rem"
-                name="search"
-                // value={search}
-                // onChange={({ target }) => setQuery(target.value)}
-                type="search"
-                width={{ base: "90vw", md: "600px" }}
-                bg="white"
-               
-            />
-            <button type='submit'  className="">Search !!!</button>
-            {/* <Button type="submit" color="primary"> Search </Button> */}
+            <input type="text" name="search" onChange={(e) => setSearch(e.target.value)} />
+            <button type='button' onClick={(e) => handleSearch(e,search)}>Search</button>
             <div className="table-wrapper">
                 <div className="table-title">
                     <div className="row">

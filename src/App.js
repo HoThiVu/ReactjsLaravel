@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import CarList from './pages/CarList';
 import AddCar from './pages/AddCar';
+// import Search from './pages/Search';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
     // </div>
     <>
     <CarList></CarList>
+    {/* <Search></Search> */}
     {/* <AddCar></AddCar> */}
     </>
   );
