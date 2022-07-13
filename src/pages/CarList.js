@@ -6,7 +6,7 @@ import { StyleListCar } from './../css/StyleListCar.css';
 import AddCar from './AddCar';
 import EditCar from './EditCar.js';
 import { Button, CardText, CardTitle, Card, Col, Row, Container, CardImg } from 'reactstrap';
-
+import { Link, useNavigate } from "react-router-dom";
 const CarList = (props) => {
     const [cars, setCars] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false)
@@ -237,6 +237,9 @@ const CarList = (props) => {
                 <button type='button' onClick={(e) => handleSearch(e, search)}>Search</button>
                 <br></br>
                 <br></br>
+                <Link to={"/quantity"}>
+                    <button className='btn' >XEM SỐ LƯỢNG THÔNG KÊ</button>
+                </Link>
                 {/* <h3>Số lượng thông kê</h3>
                 <table className='table table-striped table-hover'>
                     <thead>
@@ -300,49 +303,11 @@ const CarList = (props) => {
                         <div> NO database.</div>
                     }
                 </Row>
-                <br></br>
-                <br></br>
-                <h1>SỐ LƯỢNG THỐNG KÊ</h1>
-                <Table dark>
-                    <thead>
-                        <tr>
-                            <td>
-                                Tên Món
-                            </td>
-                            <td>
-                                Số Lượng
-                            </td>
-                            <td>
-                                ghi chú
-                            </td>
-                        </tr>
-                    </thead>
-
-
-                    <tbody>
-                        {cars.length !== 0
-                            ?
-                            cars.map((car, index) =>
-                                <tr key={index}>
-                                    <td><a href="#">
-                                        <img width="100px"
-                                            height="100px" className="avatar" src={`http://localhost:8000/img/${car.image}`} alt="Avatar" /></a></td>
-                                    <td>{car.hãng}</td>
-                                    <td>{car.id}</td> 
-                                </tr>
-                            )
-                            :
-                            <tr>
-                                <td>{'No data in database'}</td>
-
-                            </tr>}
-
-                    </tbody>
-                </Table>
+             
             </Container>
+            <br></br>
+            <br></br>
         </>
-
-
 
     );
 }
