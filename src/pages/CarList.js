@@ -5,6 +5,8 @@ import { Table } from 'reactstrap';
 import { StyleListCar } from './../css/StyleListCar.css';
 import AddCar from './AddCar';
 import EditCar from './EditCar.js';
+import { Button, CardText, CardTitle, Card, Col, Row, Container, CardImg } from 'reactstrap';
+
 const CarList = (props) => {
     const [cars, setCars] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false)
@@ -30,7 +32,8 @@ const CarList = (props) => {
 
     //bắt đầu làm cho EditCar.js
     const [editmodal, setEditModal] = useState(false);
-    const [search,setSearch] = useState();
+    const [search, setSearch] = useState();
+    // const [timkiemgia, setTimkiemgia] = useState();
     const [editCarData, setEditCarData] = useState({
         id: "",
         hãng: "",
@@ -61,13 +64,14 @@ const CarList = (props) => {
         if (!isLoaded) getCars();
     }, [isLoaded])
 
-    const handleSearch = async (e,search) => {
+    const handleSearch = async (e, search) => {
         const res = await axios.get(`http://127.0.0.1:8000/api/show?search=${search}`);
         // const carList = await res.data;
-     
+
         setCars(res.data.data);
 
     }
+
     // import axios from "axios";
     // import AddCar from './AddCar';
     // import EditCar from './EditCar';
@@ -144,67 +148,187 @@ const CarList = (props) => {
     //đóng delete
 
     return (
-        <div className="table-responsive">
-            <input type="text" name="search" onChange={(e) => setSearch(e.target.value)} />
-            <button type='button' onClick={(e) => handleSearch(e,search)}>Search</button>
-            <div className="table-wrapper">
-                <div className="table-title">
-                    <div className="row">
-                        <div className="col-xs-5">
-                            <h2>Admin <b>ListCar</b></h2>
-                            {/* <AddCar onAdded={setIsLoaded}/> */}
-                            <AddCar onAdded={setIsLoaded}></AddCar>
-                            {/* <AddCar getCars={getCars} /> */}
-                            {/* <Link to="/cars/add"><Button color="primary">Add car page</Button></Link> */}
+        // <div className="table-responsive">
+        //     <h2>Search theo hãng xe </h2>
+        //     <input type="text" name="search" onChange={(e) => setSearch(e.target.value)} />
+        //     <button type='button' onClick={(e) => handleSearch(e,search)}>Search</button>
+        //     <div className="table-wrapper">
+        //         <div className="table-title">
+        //             <div className="row">
+        //                 <div className="col-xs-5">
+        //                     <h2>Admin <b>ListCar</b></h2>
+        //                     {/* <AddCar onAdded={setIsLoaded}/> */}
+        //                     <AddCar onAdded={setIsLoaded}></AddCar>
+        //                     {/* <AddCar getCars={getCars} /> */}
+        //                     {/* <Link to="/cars/add"><Button color="primary">Add car page</Button></Link> */}
 
-                            <EditCar cars={cars} setCars={setCars} getCars={getCars} toggleEditModal={toggleEditModal} editmodal={editmodal} editCarData={editCarData} setEditCarData={setEditCarData} />
-                        </div>
+        //                     <EditCar cars={cars} setCars={setCars} getCars={getCars} toggleEditModal={toggleEditModal} editmodal={editmodal} editCarData={editCarData} setEditCarData={setEditCarData} />
+        //                 </div>
 
-                    </div>
-                </div>
-                <table className="table table-striped table-hover">
+        //             </div>
+        //         </div>
+        //         <table className="table table-striped table-hover">
+        //             <thead>
+        //                 <tr>
+        //                     <th>ID</th>
+        //                     <th>Ảnh</th>
+        //                     <th>TÊN</th>
+        //                     <th>GIÁ</th>
+        //                     <th>NSX</th>
+        //                     <th>Công cụ</th>
+        //                 </tr>
+        //             </thead>
+
+        //             <tbody>
+        //                 {cars.length !== 0
+        //                     ?
+        //                     cars.map((car, index) =>
+
+        //                         <tr key={index}>
+        //                             <td>{car.id}</td>
+        //                             <td><a href="#">
+        //                                 <img width="100px"
+        //                                     height="100px" className="avatar" src={`http://localhost:8000/img/${car.image}`} alt="Avatar" /></a></td>
+        //                             <td>{car.hãng}</td>
+        //                             <td>{car.màu}</td>
+        //                             <td>{car.produced_on}</td>
+
+        //                             <td>
+        //                                 <button title="EDIT"
+        //                                     data-toggle="tooltip" onClick={() => toggleEditModal(car)}>
+        //                                     <i className="material-icons">&#xE8B8;</i>
+
+        //                                 </button>
+        //                                 <button type="submit"
+        //                                     className="settings"
+        //                                     title="delete"
+        //                                     data-toggle="tooltip"
+        //                                     onClick={() => { if (window.confirm('Bạn có chắc chắn xóa?')) deleteCar(car.id) }}
+        //                                 > <i
+        //                                     className="material-icons">&#xE5C9;</i>
+        //                                 </button>
+        //                             </td>
+        //                         </tr>
+        //                     )
+        //                     :
+        //                     <tr>
+        //                         <td>{'No data in database'}</td>
+
+        //                     </tr>}
+
+        //             </tbody>
+
+        //         </table>
+
+        //     </div>
+        // </div>
+        <>
+            <div style={{ padding: '30px' }}>
+                <br></br>
+                <br></br>
+                <h2>Tìm kiếm</h2>
+                <h6>Nhập tên : </h6>
+                <input type="text" name="search" onChange={(e) => setSearch(e.target.value)} />
+                {/* <button type='button' onClick={(e) => handleSearch(e, search)}>Search</button> */}
+                <h6>Nhập giá : </h6>
+                <input type="text" name="search" onChange={(e) => setSearch(e.target.value)} />
+                <br></br>
+                <br></br>
+                <button type='button' onClick={(e) => handleSearch(e, search)}>Search</button>
+                <br></br>
+                <br></br>
+                {/* <h3>Số lượng thông kê</h3>
+                <table className='table table-striped table-hover'>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Ảnh</th>
-
-                            <th>hang xe</th>
-                            <th>mau xe</th>
-
-                            <th>NSX</th>
-                            <th>Công cụ</th>
+                            <th>Loại Món</th>
+                            <th>Số Lượng</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </tbody>
+                </table> */}
+            </div>
+
+            <Container
+                // className="bg-light border"
+                fluid="xl"
+            >
+
+                <Row >
+                    {cars.length !== 0
+                        ?
+                        cars.map((car, index) =>
+                            <Col sm="4" key={index}>
+                                <Card body>
+                                    <CardTitle tag="h5">
+                                        {car.hãng}
+                                    </CardTitle>
+                                    <CardImg
+                                        alt="Card image cap"
+                                        src={`http://localhost:8000/img/${car.image}`}
+                                        top
+                                        // width="100%"
+                                        className="avatar"
+                                        // width='100px'
+                                        height='200px'
+                                    />
+                                    <CardText
+                                    >
+                                        Gía : {car.màu} ngàn đồng
+                                    </CardText>
+                                    <CardText
+                                    >
+                                        Ngày sản xuất:
+                                        {car.produced_on}
+                                    </CardText>
+                                    <Button>
+                                        MUA
+                                    </Button>
+                                </Card>
+                                <br></br>
+                            </Col>
+
+                        ) :
+                        <div> NO database.</div>
+                    }
+                </Row>
+                <br></br>
+                <br></br>
+                <h1>SỐ LƯỢNG THỐNG KÊ</h1>
+                <Table dark>
+                    <thead>
+                        <tr>
+                            <td>
+                                Tên Món
+                            </td>
+                            <td>
+                                Số Lượng
+                            </td>
+                            <td>
+                                ghi chú
+                            </td>
+                        </tr>
+                    </thead>
+
 
                     <tbody>
                         {cars.length !== 0
                             ?
                             cars.map((car, index) =>
-
                                 <tr key={index}>
-                                    <td>{car.id}</td>
                                     <td><a href="#">
                                         <img width="100px"
                                             height="100px" className="avatar" src={`http://localhost:8000/img/${car.image}`} alt="Avatar" /></a></td>
                                     <td>{car.hãng}</td>
-                                    <td>{car.màu}</td>
-                                    <td>{car.produced_on}</td>
-
-                                    <td>
-                                        <button title="EDIT"
-                                            data-toggle="tooltip" onClick={() => toggleEditModal(car)}>
-                                            <i className="material-icons">&#xE8B8;</i>
-
-                                        </button>
-                                        <button type="submit"
-                                            className="settings"
-                                            title="delete"
-                                            data-toggle="tooltip"
-                                            onClick={() => { if (window.confirm('Bạn có chắc chắn xóa?')) deleteCar(car.id) }}
-                                        > <i
-                                            className="material-icons">&#xE5C9;</i>
-                                        </button>
-                                    </td>
+                                    <td>{car.id}</td> 
                                 </tr>
                             )
                             :
@@ -214,11 +338,12 @@ const CarList = (props) => {
                             </tr>}
 
                     </tbody>
+                </Table>
+            </Container>
+        </>
 
-                </table>
 
-            </div>
-        </div>
+
     );
 }
 
